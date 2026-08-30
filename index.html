@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tolis Arcade</title>
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .arcade {
+        width: 100%;
+        max-width: 700px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0 0 40px;
+        font-size: 42px;
+        letter-spacing: 3px;
+    }
+
+    .games {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .game {
+        display: block;
+        width: 100%;
+        padding: 28px 20px;
+        border: 2px solid #444;
+        border-radius: 12px;
+        background: #222;
+        color: white;
+        text-decoration: none;
+        font-size: 28px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .game:hover,
+    .game:focus {
+        background: #333;
+        outline: none;
+    }
+
+    .game:active {
+        background: #444;
+    }
+
+    .subtitle {
+        margin-top: 35px;
+        color: #888;
+        font-size: 14px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<main class="arcade">
+
+    <h1>TOLIS ARCADE</h1>
+
+    <div class="games">
+
+        <a class="game" href="./solitaire/index.html">
+            🃏 SOLITAIRE
+        </a>
+
+        <a class="game" href="./tetris/index.html">
+            🧱 TETRIS
+        </a>
+
+    </div>
+
+    <div class="subtitle">
+        HTML5 Games
+    </div>
+
+</main>
+```
+
+</body>
+</html>
