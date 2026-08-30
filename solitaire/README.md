@@ -1,25 +1,61 @@
-# Javascript Solitaire
+# Classic Solitaire
 
-## Demo
-The game can be demoed on CodePen by [clicking here](https://codepen.io/ozboware/full/QWmbpjM)
+A classic Klondike solitaire game built as a static website with HTML, CSS, and JavaScript. It has no external dependencies and can be hosted from any static web server.
 
-Or it can be played on GitHub by [clicking here](https://ozboware.github.io/Javascript-Solitaire/)
+## Run locally
 
-## Installation
+Open `index.html` directly in a browser.
 
-**No installation**
+To serve it locally like a static website:
 
-Just open the index file in your browser to play.
+```bash
+python3 -m http.server 8080
+```
 
-## Controls
+Then open `http://localhost:8080`.
 
-Drag and drop to move cards.
+## How it works
 
-Press **D** to deal a new hand
+- `index.html` defines the board: stock, waste, four foundations, seven tableau columns, and the win dialog.
+- `styles.css` draws the table and cards with stable responsive sizing.
+- `game.js` contains the Klondike rules: shuffle, deal, draw, validate moves, flip cards, undo moves, move to foundations, and detect wins.
+- `assets/card-back.svg` is the local card-back artwork. No third-party assets are loaded.
 
-## Screenshots
+The game state lives in browser memory. There are no accounts, forms, cookies, databases, or network requests.
 
-![Javascript Solitaire Screenshot 1](https://user-images.githubusercontent.com/95859352/176996594-900c3b57-d397-485e-a431-3bce336320f3.png)
-![Javascript Solitaire Screenshot 2](https://user-images.githubusercontent.com/95859352/176996596-56e002d0-2a53-4481-b055-ee2a1ace6aab.png)
-![Javascript Solitaire Screenshot 3](https://user-images.githubusercontent.com/95859352/176996598-86988544-f85b-4472-a97d-3b30862b7669.png)
-![Javascript Solitaire Screenshot 4](https://user-images.githubusercontent.com/95859352/176996600-ef31bd57-d20b-4013-b5a2-9936a55a6981.png)
+## License
+
+MIT License. See `LICENSE` for details.
+
+## Secure static hosting
+
+Because this is a static website, serve only these files from a directory that is not writable by public users.
+
+Example Nginx configuration:
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name example.com;
+    root /var/www/classic-solitaire;
+    index index.html;
+
+    add_header Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "no-referrer" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+Tips:
+
+- Use HTTPS with automatically renewed certificates.
+- Do not mix this site with admin panels or private routes.
+- Avoid third-party scripts unless you control and review them, and update the CSP accordingly.
+- Serve the files with an unprivileged user from a clean deployment directory.
+- Keeping the project backend-free greatly reduces the attack surface.
